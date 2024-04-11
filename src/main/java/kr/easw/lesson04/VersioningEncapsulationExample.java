@@ -12,9 +12,7 @@ package kr.easw.lesson04;
  */
 public class VersioningEncapsulationExample {
     public static String VALUE = "Hello, World!";
-
     public static String RESULT_SECOND = "Hello, World?";
-
     public static String RESULT_THIRD = "Hello,World?";
 
     public static void main(String[] args) {
@@ -23,16 +21,19 @@ public class VersioningEncapsulationExample {
             System.out.println("오답입니다.");
             return;
         }
+
         test = new TestV2();
         if (!test.doAction(VALUE).equals(RESULT_SECOND)) {
             System.out.println("오답입니다.");
             return;
         }
+
         test = new TestV3();
         if (!test.doAction(VALUE).equals(RESULT_THIRD)) {
             System.out.println("오답입니다.");
             return;
         }
+
         System.out.println("정답입니다.");
     }
 
@@ -40,29 +41,24 @@ public class VersioningEncapsulationExample {
         String doAction(String type);
     }
 
-
     static class TestV1 implements TestInterface {
         @Override
         public String doAction(String type) {
-            throw new RuntimeException("이 코드 라인을 지우고, 이곳에서 작성하십시오.");
+            return type;
         }
     }
 
-
-    // Split by space
     static class TestV2 implements TestInterface {
         @Override
         public String doAction(String type) {
-            throw new RuntimeException("이 코드 라인을 지우고, 이곳에서 작성하십시오.");
+            return type.replace("!", "?");
         }
     }
 
-
-    // Split by space, and concat
     static class TestV3 implements TestInterface {
         @Override
         public String doAction(String type) {
-            throw new RuntimeException("이 코드 라인을 지우고, 이곳에서 작성하십시오.");
+            return type.replace("!", "?").replace(" ", "");
         }
     }
 }
