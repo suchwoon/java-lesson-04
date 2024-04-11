@@ -12,6 +12,7 @@ package kr.easw.lesson04;
  * 오류는 throw new 구문으로 발생시킬 수 있습니다.
  */
 public class EncapsulationExample {
+
     public static void main(String[] args) {
         try {
             Car car = getCar();
@@ -26,7 +27,6 @@ public class EncapsulationExample {
 
     private static abstract class Car {
         private final String carName = "Car Prototype";
-
         private double realFuelEfficiency = 7.5;
 
         public String getCarName() {
@@ -38,6 +38,9 @@ public class EncapsulationExample {
         }
 
         public void setRealFuelEfficiency(double realFuelEfficiency) {
+            if (realFuelEfficiency > this.realFuelEfficiency) {
+                throw new IllegalArgumentException("연비 값을 현재 값보다 높게 설정할 수 없습니다.");
+            }
             this.realFuelEfficiency = realFuelEfficiency;
         }
     }
@@ -51,9 +54,7 @@ public class EncapsulationExample {
         public String getCarName() {
             return "New Car";
         }
-
     }
-
 
     public static Car getCar() {
         return new PerformanceManipulation();
